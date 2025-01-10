@@ -3,10 +3,10 @@ import hashlib
 from flask import (
     Flask, render_template, request, redirect, url_for, session, flash, send_from_directory
 )
-from db import db_connection
+from db import *
 
 app = Flask(__name__)
-app.secret_key = 'THISISMYSECRETKEY'
+app.secret_key = os.getenv('SECRETKEY')
 
 
 @app.before_request
@@ -536,4 +536,4 @@ def delete_user(user_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, host=os.getenv('HOST'), port=os.getenv('PORT'))
